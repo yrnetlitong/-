@@ -1,0 +1,73 @@
+# 部署 SSH 配置文件
+# 复制此文件为 .deploy-ssh.conf 并填写实际信息
+# 用于 dev_push_master.sh 和 srv_pull_master.sh
+
+# ============================================
+# SSH 服务器配置
+# ============================================
+# 服务器地址
+SSH_HOST="your-server-ip"
+
+# SSH 用户名
+SSH_USER="root"
+
+# SSH 端口（可选，默认: 22）
+SSH_PORT="22"
+
+# SSH 密钥路径（可选，使用密钥认证）
+# 如果未设置，将尝试使用默认密钥 ~/.ssh/id_rsa
+SSH_KEY=""
+
+# 服务器项目路径
+SERVER_PATH="/www/wwwroot/your-domain.com"
+
+# Git 仓库地址（Codeup）
+GIT_REPO="git@codeup.aliyun.com:your-org/your-repo.git"
+
+# Git 分支（可选，默认: master）
+GIT_BRANCH="master"
+
+# Web 进程用户；root 部署时用于收敛 runtime/uploads 权限
+WEB_USER="www"
+WEB_GROUP="www"
+
+# 宝塔面板资源（默认强制检查，确保登录面板可见）
+REQUIRE_BT_RECORDS="true"
+SITE_DOMAIN="your-domain.com"
+REQUIRE_HTTPS="true"
+
+# 检测到 Flutter/Web 子项目时，部署前执行分析、测试和 Release 构建
+CHECK_PLATFORMS_ON_DEPLOY="true"
+
+# ============================================
+# 可选：部署后自动导入初始化 SQL
+# ============================================
+# 是否自动导入 SQL（true/false）
+# AUTO_IMPORT_SQL="false"
+# 远端 SQL 文件路径（相对 SERVER_PATH 或绝对路径）
+# INIT_SQL_FILE="document/test1.sql"
+# 数据库连接
+# DB_HOST="127.0.0.1"
+# DB_PORT="3306"
+# DB_NAME 和 DB_USER 同时用于核对宝塔面板数据库记录，必须填写
+DB_NAME="your_database"
+DB_USER="your_database_user"
+# DB_PASS="your-password"
+
+# ============================================
+# 可选：部署后自动冒烟检查
+# ============================================
+# 例如: http://init.yun3.yrnet.top
+# DEPLOY_BASE_URL=""
+
+# ============================================
+# 自动配置 SSH（首次使用）
+# ============================================
+# 是否自动配置 SSH 密钥（可选，默认: true）
+# AUTO_SETUP_SSH="true"
+
+# SSH 密钥类型（可选，默认: rsa）
+# SSH_KEY_TYPE="rsa"
+
+# SSH 密钥长度（可选，默认: 4096）
+# SSH_KEY_BITS="4096"

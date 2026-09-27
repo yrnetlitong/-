@@ -1,0 +1,5 @@
+const api = require('../../utils/api'); const ui = require('../../utils/ui')
+Page({ data: { list: [], total: 0, page: 1, loading: false, error: '' }, onShow() { this.load() }, onPullDownRefresh() { this.load().finally(() => wx.stopPullDownRefresh()) }, onReachBottom() { if (this.data.list.length < this.data.total) this.load(true) },
+  async load(more = false) { if (this.data.loading || !(await ui.auth())) return; const page = more === true ? this.data.page + 1 : 1; this.setData({ loading: true, error: '' }); try { const r = await api.get('pet/messages', { page }); this.setData({ list: (page > 1 ? this.data.list : []).concat(r.list.map(ui.decorate)), page, total: r.total }) } catch (e) { this.setData({ error: e.message }) } finally { this.setData({ loading: false }) } },
+  async detail(e) { const item = this.data.list.find(x => x.id === Number(e.currentTarget.dataset.id)); try { await api.post('pet/readMessage', { id: item.id }); wx.navigateTo({ url: item.pet_kind === 'place' ? '/pages/place/index?id=' + item.pet_object_id : '/pages/reminders/index?pet_id=' + item.pet_object_id }) } catch (err) { ui.error(err) } }
+})

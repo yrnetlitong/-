@@ -1,0 +1,18 @@
+<view class="map-page">
+  <scroll-view class="category-tabs" scroll-x><view class="tabs"><view class="tab {{category===''?'selected':''}}" data-value="" bindtap="filter">全部</view><view wx:for="{{categories}}" wx:key="value" class="tab {{category===item.value?'selected':''}}" data-value="{{item.value}}" bindtap="filter">{{item.label}}</view></view></scroll-view>
+  <map id="places-map" class="places-map" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" show-location="{{located}}" scale="{{scale}}" bindmarkertap="selectPlace" bindcallouttap="selectPlace">
+    <cover-view wx:if="{{loading || error || !markers.length}}" class="map-message" bindtap="retry">{{loading?'正在加载点位…':error ? error+'，点击重试':'这里还没有收录点位，欢迎分享你的发现。'}}</cover-view>
+    <cover-view wx:if="{{!placesOpen}}" class="map-actions {{selected ? 'with-selection' : ''}}"><cover-view class="nearby-button" bindtap="showUserPlaces">用户投稿去处</cover-view><cover-view class="submit-button" bindtap="submit">＋ 投稿</cover-view></cover-view>
+    <cover-view wx:if="{{selected}}" class="selected-panel">
+      <cover-view class="selected-heading"><cover-view class="selected-caption">发现一个友好去处</cover-view><cover-view class="selected-close" bindtap="closeSelected" aria-label="关闭点位信息">×</cover-view></cover-view>
+      <cover-view class="selected-card" data-id="{{selected.id}}" bindtap="detail">
+        <cover-image class="selected-image" src="{{selected.cover}}"/>
+        <cover-view class="selected-copy"><cover-view class="selected-name">{{selected.name}}</cover-view><cover-view class="selected-address">{{selected.address}}</cover-view><cover-view class="selected-meta">{{selected.categoryText}} · {{selected.source==='official'?'官方收录':'用户推荐'}}</cover-view><cover-view class="selected-link">查看点位详情 ›</cover-view></cover-view>
+      </cover-view>
+    </cover-view>
+  </map>
+  <view wx:if="{{placesOpen}}" class="nearby-panel">
+    <view class="panel-heading"><text>用户投稿去处 · {{userPlaces.length}}</text><button size="mini" class="close-panel" bindtap="closePlaces" aria-label="关闭用户投稿去处">×</button></view>
+    <scroll-view scroll-y class="nearby-list"><view wx:for="{{userPlaces}}" wx:key="id" class="nearby-place" data-id="{{item.id}}" bindtap="detail"><image class="place-image" src="{{item.cover}}" mode="aspectFill"/><view class="place-copy"><view class="name">{{item.name}}</view><view class="muted">{{item.address}}</view><text class="tag">{{item.categoryText}}</text></view><text>›</text></view><view wx:if="{{!userPlaces.length}}" class="empty">{{loading?'正在加载用户投稿…':'当前分类还没有审核通过的用户投稿，欢迎分享。'}}</view></scroll-view>
+  </view>
+</view>

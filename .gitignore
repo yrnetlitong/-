@@ -1,0 +1,64 @@
+.DS_Store
+document/*
+!document/*.sql
+docker
+runtime
+vendor
+.env
+.well-known
+public/uploads
+uniapp
+
+# 开发环境 PID 和日志文件
+.backend.pid
+.frontend.pid
+.backend.log
+.frontend.log
+
+# 数据库备份文件
+backups/
+*.sql.gz
+
+# 部署配置文件（包含敏感信息）
+.deploy-ssh.conf
+
+# AI 生成的临时文件（禁止提交）
+README_*.md
+USAGE.md
+GUIDE.md
+TEMP_*.md
+*_TEMP.md
+*_DRAFT.md
+*_NOTES.md
+*_SUMMARY.md
+*_REPORT.md
+AI_*.md
+PLAN_*.md
+IMPLEMENTATION_*.md
+CHANGELOG_AI*.md
+test_*.sh
+temp_*.php
+debug_*.js
+one-time_*.sh
+*.tmp.md
+*.temp.*
+*.bak
+# AI 生成的 SQL 文件（禁止提交，除非用户明确要求）
+migration_*.sql
+init_*.sql
+update_*.sql
+alter_*.sql
+temp_*.sql
+
+# 项目文档目录（模板生成，默认不提交）
+docs/
+# AI 辅助规范文件（本地可用，默认不提交）
+AI_GUIDE.md
+.aiignore
+.cursorignore
+.cursor/
+AGENTS.md
+
+# 小程序构建时由环境配置生成
+miniprogram/config.js
+miniprogram/project.private.config.json

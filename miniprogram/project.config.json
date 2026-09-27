@@ -1,0 +1,28 @@
+{
+  "appid": "wx3f759af73a6ccc4c",
+  "compileType": "miniprogram",
+  "projectname": "豆知宠物",
+  "miniprogramRoot": "./",
+  "libVersion": "3.7.12",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "urlCheck": true,
+    "minifyWXML": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "packNpmRelationList": [],
+    "disableSWC": true,
+    "useCompilerPlugins": false
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "condition": {}
+}

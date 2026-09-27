@@ -1,0 +1,198 @@
+/** 全局样式 */
+// 如果需要覆盖更多样式变量请查看文档
+$--ele-font-path: "~ele-admin/packages/style/fonts";
+// 如果不需要切换主题使用这个
+//@import "~ele-admin/packages/style/themes/default.scss";
+// 如果不需要切换主题固定为夜间主题使用这个
+//@import "~ele-admin/packages/style/themes/dark.scss";
+// 需要在线切换主题使用这个
+@import "~ele-admin/packages/style/themes/dynamic.scss";
+@import "~element-ui/packages/theme-chalk/src/descriptions.scss";
+@import "~element-ui/packages/theme-chalk/src/descriptions-item.scss";
+
+/* 异常页面 */
+.ele-exception {
+  margin: 145px 0;
+
+  .ele-exception-img,
+  .ele-exception-content {
+    margin: 15px 30px;
+    display: inline-block;
+    vertical-align: middle;
+
+    img {
+      filter: $--content-image-filter;
+    }
+  }
+
+  .ele-exception-content > h1 {
+    font-size: 72px;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+  }
+
+  .ele-exception-content > p {
+    font-size: 20px;
+    margin: 0 0 25px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ele-exception {
+    margin: 40px 0;
+
+    .ele-exception-img {
+      margin: 0;
+
+      img {
+        max-height: 200px;
+        max-width: 100%;
+      }
+    }
+
+    .ele-exception-content {
+      text-align: center;
+    }
+  }
+}
+
+[ele-resizable].el-dialog__wrapper > .el-dialog > .el-dialog__header {
+  flex-shrink: 0;
+}
+
+.ele-admin-sidebar .ele-admin-sidebar-menus > .el-menu {
+  overflow: hidden;
+}
+
+/* 初始化项目通用交互与响应式约束 */
+:focus-visible {
+  outline: 2px solid $--color-primary;
+  outline-offset: 2px;
+}
+
+.el-button:focus-visible,
+.el-input__inner:focus-visible,
+.el-textarea__inner:focus-visible,
+.el-checkbox__input:focus-visible + .el-checkbox__label {
+  outline: 2px solid $--color-primary;
+  outline-offset: 2px;
+}
+
+.el-card,
+.el-dialog {
+  border-radius: 6px;
+}
+
+.el-card {
+  border-color: $--border-color-lighter;
+}
+
+.ele-form-search {
+  padding-bottom: 1px;
+  border-bottom: 1px solid $--border-color-lighter;
+}
+
+.ele-form-actions {
+  white-space: nowrap;
+}
+
+.el-dialog {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100vw - 32px);
+  max-height: calc(85vh - 16px);
+}
+
+.el-dialog__header,
+.el-dialog__footer {
+  flex-shrink: 0;
+}
+
+.el-dialog__body {
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.el-dialog__footer {
+  padding-top: 12px;
+  border-top: 1px solid $--border-color-lighter;
+}
+
+.el-table__empty-block {
+  min-height: 180px;
+}
+
+@media screen and (max-width: 768px) {
+  .ele-body {
+    padding: 10px;
+  }
+
+  .ele-body.ele-body-card .el-card {
+    margin-bottom: 10px;
+  }
+
+  .el-card__body {
+    padding: 14px;
+  }
+
+  .ele-form-search .el-form-item {
+    display: flex;
+  }
+
+  .ele-form-search .el-form-item__content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .ele-form-search .el-input,
+  .ele-form-search .el-select,
+  .ele-form-search .el-cascader,
+  .ele-form-search .el-date-editor {
+    width: 100%;
+  }
+
+  .ele-form-search .ele-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    white-space: normal;
+  }
+
+  .ele-pro-table .ele-pro-table-toolbar {
+    overflow-x: auto;
+  }
+
+  .el-dialog__header,
+  .el-dialog__body,
+  .el-dialog__footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .el-dialog {
+    max-height: calc(100vh - 32px);
+    margin-top: 16px !important;
+  }
+
+  .el-dialog__body .el-form:not(.el-form--inline) .el-form-item__label {
+    float: none;
+    width: auto !important;
+    padding-bottom: 6px;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .el-dialog__body .el-form:not(.el-form--inline) .el-form-item__content {
+    margin-left: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

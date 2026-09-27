@@ -1,0 +1,1 @@
+<import src="../../templates/state.wxml"/><view class="page"><view class="eyebrow">WITH LOVE, DOUZHI</view><view class="title">{{title}}</view><template is="state" data="{{loading,error}}"/><view class="card note">{{content}}</view><button wx:if="{{privacy}}" class="secondary" bindtap="settings">管理微信授权与通知设置</button></view>

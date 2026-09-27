@@ -1,0 +1,26 @@
+# PHPStan 配置文件
+# 
+# 使用方法：
+# 1. 安装：composer require --dev phpstan/phpstan
+# 2. 运行：./vendor/bin/phpstan analyse
+
+parameters:
+    level: 5
+    paths:
+        - app
+        - config
+        - route
+        - extend
+    excludePaths:
+        - */vendor/*
+        - */runtime/*
+        - */public/uploads/*
+    ignoreErrors:
+        # ThinkPHP 框架相关
+        - '#Call to an undefined method think\\db\\Query::.*#'
+        - '#Access to an undefined property think\\db\\Query::.*#'
+        # 动态属性
+        - '#Access to an undefined property.*#'
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+

@@ -1,0 +1,12 @@
+const api = require('../../utils/api'); const ui = require('../../utils/ui')
+Page({ data: { stars: [1, 2, 3, 4, 5], item: null, reviews: [], reviewTotal: 0, reviewPage: 1, content: '', rating: 5, reviewOpen: false, loading: false, saving: false, error: '' }, onLoad(o) { this.id = o.id }, onShow() { this.load() }, onPullDownRefresh() { this.load().finally(() => wx.stopPullDownRefresh()) }, onReachBottom() { if (this.data.reviews.length < this.data.reviewTotal) this.moreReviews() },
+  async load() { if (this.data.loading) return; this.setData({ loading: true, error: '' }); try { const item = await api.get('index/place', { id: this.id }); this.setData({ item: ui.decorate(item), reviews: [], reviewPage: 0, reviewTotal: 0 }); if (item.status === 1) await this.moreReviews() } catch (e) { this.setData({ error: e.message }) } finally { this.setData({ loading: false }) } },
+  async moreReviews() { if (this.reviewsBusy) return; this.reviewsBusy = true; try { const r = await api.get('index/reviews', { place_id: this.id, page: this.data.reviewPage + 1 }); this.setData({ reviews: this.data.reviews.concat(r.list.map(ui.decorate)), reviewPage: r.page, reviewTotal: r.total }) } catch (e) { ui.error(e) } finally { this.reviewsBusy = false } },
+  navigate() { const p = this.data.item; wx.openLocation({ latitude: Number(p.latitude), longitude: Number(p.longitude), name: p.name, address: p.address, fail: () => ui.error(new Error('无法打开导航，请稍后重试')) }) },
+  phone() { if (this.data.item.phone) wx.makePhoneCall({ phoneNumber: this.data.item.phone }) }, preview: ui.preview,
+  edit() { wx.navigateTo({ url: '/pages/edit/index?kind=place&id=' + this.id }) }, input(e) { this.setData({ content: e.detail.value }) }, rate(e) { const rating = Number(e.currentTarget.dataset.rating); if (Number.isInteger(rating) && rating >= 1 && rating <= 5) this.setData({ rating }) },
+  openReview() { this.setData({ reviewOpen: true, content: '', rating: 5 }) },
+  closeReview() { if (!this.data.saving) this.setData({ reviewOpen: false, content: '', rating: 5 }) },
+  stopScroll() { return false },
+  async review() { if (this.data.saving || !(await ui.auth())) return; if (!this.data.content.trim()) return ui.error(new Error('请写下你的真实体验')); this.setData({ saving: true }); try { await api.post('pet/review', { place_id: this.id, rating: this.data.rating, content: this.data.content }); this.setData({ content: '', rating: 5, reviewOpen: false }); wx.showToast({ title: '评价已提交' }); await this.load() } catch (e) { ui.error(e) } finally { this.setData({ saving: false }) } }
+})
